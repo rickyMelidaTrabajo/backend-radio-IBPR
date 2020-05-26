@@ -1,7 +1,7 @@
 let express = require('express');
 let canciones = require('../controllers/canciones');
 
-let router = express.Router();
+let router = express();
 
 
 //rutas
