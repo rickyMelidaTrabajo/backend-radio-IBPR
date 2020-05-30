@@ -11,4 +11,4 @@ let cancioneShema = schema({
     duracion: String
 });
 
-module.exports = cancioneShema;
+module.exports = mongoose.model('Cancion', cancioneShema);
