@@ -1,13 +1,47 @@
 const validator = require('validator');
 const Reproductor = require('../models/reproductor');
 let reproductor = {
+
+    test: (req, res)=>{
+        let datos = req.body;
+
+        return res.status(200).send({
+            status: 'success',
+            mensaje: 'Haciendo pruebas',
+            datos: datos
+        });
+    },
     agregar: (req, res)=>{
         let datos = req.body;
 
+        //validamos los datos
         try {
-            
-        }catch(err) {
+            var validarFecha = !validator.isEmpty(datos.fecha);
+            var validarPos = !validator.isEmpty(datos.pos);
+            var validarNombre = !validator.isEmpty(datos.nombre);
+            var validarArtista = !validator.isEmpty(datos.artista);
+            var validarTipoAudio = !validator.isEmpty(datos.tipo);
+            var validarDuracion = !validator.isEmpty(datos.duracion);
+            var validarHoraRep = !validator.isEmpty(datos.hora_rep);
 
+        }catch(err) {
+            return res.status(200).send({
+                status: 'error',
+                mensaje: 'Faltan datos'
+            });
+        }
+
+        if(validarFecha && validarPos && validarNombre && validarArtista && validarTipoAudio && validarDuracion && validarHoraRep) {
+            return res.status(200).send({
+                status: 'success',
+                mensaje: 'Perfecto, todos los datos se validaron',
+                datos: datos
+            });
+        }else {
+            return res.status(200).send({
+                status: 'error', 
+                mensaje: 'No se validaron los datos'
+            });
         }
 
     },
