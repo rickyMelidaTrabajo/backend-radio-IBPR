@@ -1,0 +1,88 @@
+{
+	"_id" : "ObjectId(5e40a38f6d0ca0286db6ef68)",
+	"2020-06-07": [
+		{
+            "pos": 1,
+            "nombre": "Si no llenamos la tierra",
+            "artista": "Santiago Benavides",
+            "tipo_audio": "Lento",
+            "duracion": "04:30",
+            "hora_rep": "00:04:30"
+        },
+        {
+            "pos": 2,
+            "nombre": "En el cielo no hay hospital",
+            "artista": "Juan Luis Guerra",
+            "tipo_audio": "Movido",
+            "duracion": "04:10",
+            "hora_rep": "00:04:30"
+        }
+	]
+},
+
+{
+	
+	"_id" : "ObjectId(5e40a38f6d0ca0286db6ef68)",
+	"2020-06-08": [
+		{
+            "pos": 1,
+            "nombre": "Si no llenamos la tierra",
+            "artista": "Santiago Benavides",
+            "tipo_audio": "Lento",
+            "duracion": "04:30",
+            "hora_rep": "00:04:30"
+        },
+        {
+            "pos": 2,
+            "nombre": "En el cielo no hay hospital",
+            "artista": "Juan Luis Guerra",
+            "tipo_audio": "Movido",
+            "duracion": "04:10",
+            "hora_rep": "00:04:30"
+        }
+	]
+},
+
+{
+	"_id" : "ObjectId(5e40a3ba0510d529014efb5e)",
+	"2020-06-09": [
+		{
+            "pos": 1,
+            "nombre": "Si no llenamos la tierra",
+            "artista": "Santiago Benavides",
+            "tipo_audio": "Lento",
+            "duracion": "04:30",
+            "hora_rep": "00:04:30"
+        },
+        {
+            "pos": 2,
+            "nombre": "En el cielo no hay hospital",
+            "artista": "Juan Luis Guerra",
+            "tipo_audio": "Movido",
+            "duracion": "04:10",
+            "hora_rep": "00:04:30"
+        }
+	]
+},
+
+{
+	"_id" : "ObjectId(5e40a43947aba529d4353197)",
+	"2020-06-10": [
+		{
+            "pos": 1,
+            "nombre": "Si no llenamos la tierra",
+            "artista": "Santiago Benavides",
+            "tipo_audio": "Lento",
+            "duracion": "04:30",
+            "hora_rep": "00:04:30"
+        },
+        {
+            "pos": 2,
+            "nombre": "En el cielo no hay hospital",
+            "artista": "Juan Luis Guerra",
+            "tipo_audio": "Movido",
+            "duracion": "04:10",
+            "hora_rep": "00:04:30"
+        }
+	]
+}
