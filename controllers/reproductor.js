@@ -22,7 +22,7 @@ let reproductor = {
             var validarArtista = !validator.isEmpty(datos.artista);
             var validarTipoAudio = !validator.isEmpty(datos.tipo);
             var validarDuracion = !validator.isEmpty(datos.duracion);
-            var validarHoraRep = !validator.isEmpty(datos.hora_rep);
+            var validarHoraRep = !validator.isEmpty(datos.hora);
 
         }catch(err) {
             return res.status(200).send({
@@ -34,6 +34,7 @@ let reproductor = {
         if(validarFecha && validarPos && validarNombre && validarArtista && validarTipoAudio && validarDuracion && validarHoraRep) {
             var reproductor = new Reproductor();
 
+<<<<<<< HEAD
             //reproductor.fecha = datos.fecha;
             reproductor.pos = datos.pos;
             reproductor.artista = datos.artista;
@@ -56,6 +57,27 @@ let reproductor = {
             })
 
             /*return res.status(200).send({
+=======
+            reproductor.fecha = datos.fecha;
+            reproductor.pos = datos.pos;
+            reproductor.nombre = datos.nombre;
+            reproductor.artista = datos.artista;
+            reproductor.tipo = datos.tipo;
+            reproductor.duracion = datos.duracion;
+            reproductor.hora = datos.hora;
+
+            reproductor.save((err, data)=> {
+                if(err) {
+                    return res.status(404).send({
+                        status: 'error',
+                        mensaje: 'El reproductor no se ha gurdado'
+                    });
+                }
+            })
+
+            
+            return res.status(200).send({
+>>>>>>> 3a8e2530834ddddaad40ada5d00640bc2e4f8935
                 status: 'success',
                 mensaje: 'Perfecto, todos los datos se validaron',
                 datos: datos
