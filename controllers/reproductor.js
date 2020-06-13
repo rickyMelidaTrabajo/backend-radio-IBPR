@@ -32,11 +32,34 @@ let reproductor = {
         }
 
         if(validarFecha && validarPos && validarNombre && validarArtista && validarTipoAudio && validarDuracion && validarHoraRep) {
-            return res.status(200).send({
+            var reproductor = new Reproductor();
+
+            //reproductor.fecha = datos.fecha;
+            reproductor.pos = datos.pos;
+            reproductor.artista = datos.artista;
+            reproductor.tipo = datos.tipo;
+            reproductor.duracion = datos.duracion;
+            reproductor.hora = datos.hora_rep;
+
+            reproductor.save((err, rep)=>{
+                if(err || !rep) {
+                    return res.status(404).send({
+                        status: 'error',
+                        mensaje: 'No se ha podido guardar los datos'
+                    });
+                }else {
+                    return res.status(200).send({
+                        status: 'success',
+                        reproductor: rep
+                    })
+                }
+            })
+
+            /*return res.status(200).send({
                 status: 'success',
                 mensaje: 'Perfecto, todos los datos se validaron',
                 datos: datos
-            });
+            });*/
         }else {
             return res.status(200).send({
                 status: 'error', 
