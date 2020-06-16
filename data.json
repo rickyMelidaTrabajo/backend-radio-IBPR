@@ -1,7 +1,7 @@
 {
-	"_id" : "ObjectId(5e40a38f6d0ca0286db6ef68)",
-	"2020-06-07": [
-		{
+    "_id": "ObjectId(5e40a38f6d0ca0286db6ef68)",
+    "2020-06-07": [
+        {
             "pos": 1,
             "nombre": "Si no llenamos la tierra",
             "artista": "Santiago Benavides",
@@ -17,14 +17,12 @@
             "duracion": "04:10",
             "hora_rep": "00:04:30"
         }
-	]
+    ]
 },
-
 {
-	
-	"_id" : "ObjectId(5e40a38f6d0ca0286db6ef68)",
-	"2020-06-08": [
-		{
+    "_id": "ObjectId(5e40a38f6d0ca0286db6ef68)",
+    "2020-06-08": [
+        {
             "pos": 1,
             "nombre": "Si no llenamos la tierra",
             "artista": "Santiago Benavides",
@@ -40,13 +38,12 @@
             "duracion": "04:10",
             "hora_rep": "00:04:30"
         }
-	]
+    ]
 },
-
 {
-	"_id" : "ObjectId(5e40a3ba0510d529014efb5e)",
-	"2020-06-09": [
-		{
+    "_id": "ObjectId(5e40a3ba0510d529014efb5e)",
+    "2020-06-09": [
+        {
             "pos": 1,
             "nombre": "Si no llenamos la tierra",
             "artista": "Santiago Benavides",
@@ -62,13 +59,12 @@
             "duracion": "04:10",
             "hora_rep": "00:04:30"
         }
-	]
+    ]
 },
-
 {
-	"_id" : "ObjectId(5e40a43947aba529d4353197)",
-	"2020-06-10": [
-		{
+    "_id": "ObjectId(5e40a43947aba529d4353197)",
+    "2020-06-10": [
+        {
             "pos": 1,
             "nombre": "Si no llenamos la tierra",
             "artista": "Santiago Benavides",
@@ -84,5 +80,38 @@
             "duracion": "04:10",
             "hora_rep": "00:04:30"
         }
-	]
+    ]
+},
+{
+    "fecha": "2020-06-16",
+    "pos": 6,
+    "nombre": "Eres preciosa",
+    "artista": "Santiago Benavides",
+    "tipo": "Lento",
+    "duracion": "220", //Esto la duracion en segundos
+    "horaInicio": "19500", //La hora que se va a reproducir el audio, en segundos
+    "horaFin": "19720" // La hora que va a terminar de reproducir el audio, en segundos
+},
+{
+    "fecha": "2020-06-16",
+    "pos": 7,
+    "nombre": "Yo todo te lo doy",
+    "artista": "Alex Zurdo",
+    "tipo": "Movido",
+    "duracion": "230", //Esto la duracion en segundos
+    "horaInicio": "19720", //La hora que se va a reproducir el audio, en segundos
+    "horaFin": "19950" // La hora que va a terminar de reproducir el audio, en segundos
+},
+{
+    "fecha": "2020-06-16",
+    "pos": 8,
+    "nombre": "El Pastor",
+    "artista": "Alex Zurdo",
+    "tipo": "Lento",
+    "duracion": "271", //Esto la duracion en segundos
+    "horaInicio": "19950", //La hora que se va a reproducir el audio, en segundos
+    "horaFin": "20221" // La hora que va a terminar de reproducir el audio, en segundos
 }
+
+/* 19950 - 19800 = 150(2:30)
+*/
