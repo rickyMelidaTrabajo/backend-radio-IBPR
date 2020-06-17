@@ -11,6 +11,7 @@ let reproductor = {
             datos: datos
         });
     },
+
     agregar: (req, res)=>{
         let datos = req.body;
 
@@ -19,11 +20,11 @@ let reproductor = {
             var validarFecha = !validator.isEmpty(datos.fecha);
             var validarPos = !validator.isEmpty(datos.pos);
             var validarNombre = !validator.isEmpty(datos.nombre);
-            var validarArtista = !validator.isEmpty(datos.artista);
+            var validarAutor = !validator.isEmpty(datos.autor);
             var validarTipoAudio = !validator.isEmpty(datos.tipo);
             var validarDuracion = !validator.isEmpty(datos.duracion);
-            var validarHoraRep = !validator.isEmpty(datos.hora);
-
+            var validarHoraInicio = !validator.isEmpty(datos.horaInicio);
+            var validarHoraFin = !validator.isEmpty(datos.horaFin);
         }catch(err) {
             return res.status(200).send({
                 status: 'error',
@@ -31,15 +32,17 @@ let reproductor = {
             });
         }
 
-        if(validarFecha && validarPos && validarNombre && validarArtista && validarTipoAudio && validarDuracion && validarHoraRep) {
+        if(validarFecha && validarPos && validarNombre && validarAutor && validarTipoAudio && validarDuracion && validarHoraInicio && validarHoraFin) {
             var reproductor = new Reproductor();
 
-            //reproductor.fecha = datos.fecha;
+            reproductor.fecha = datos.fecha;
             reproductor.pos = datos.pos;
-            reproductor.artista = datos.artista;
+            reproductor.nombre = datos.nombre;
+            reproductor.autor = datos.autor;
             reproductor.tipo = datos.tipo;
             reproductor.duracion = datos.duracion;
-            reproductor.hora = datos.hora_rep;
+            reproductor.horaInicio = datos.horaInicio;
+            reproductor.horaFin = datos.horaFin;
 
             reproductor.save((err, rep)=>{
                 if(err || !rep) {
@@ -68,6 +71,7 @@ let reproductor = {
         }
 
     },
+
     ver: (req, res)=>{
         let query = Reproductor.find();
         let nombre = req.params.nombre;
