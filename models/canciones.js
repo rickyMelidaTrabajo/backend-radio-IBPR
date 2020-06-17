@@ -7,7 +7,7 @@ const schema = mongoose.Schema;
 let cancioneShema = schema({
     nombre: String,
     autor: String,
-    genero: String,
+    tipo: String,
     duracion: String
 });
 

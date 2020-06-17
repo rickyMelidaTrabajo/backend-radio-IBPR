@@ -7,7 +7,7 @@ let router = express();
 //rutas
 router.post('/add', canciones.agregar);
 router.get('/canciones/:nombre?', canciones.ver);
-router.put('/canciones/id', canciones.modificar);
-router.delete('/canciones/id', canciones.eliminar);
+router.put('/modificar/:id', canciones.modificar);
+router.delete('/delete/:id', canciones.eliminar);
 
 module.exports = router;
