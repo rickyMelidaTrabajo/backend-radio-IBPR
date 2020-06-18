@@ -73,10 +73,13 @@ let reproductor = {
     },
 
     ver: (req, res)=>{
-        let query = Reproductor.find();
-        let nombre = req.params.nombre;
+
+        let fecha = req.params.fecha;
+
+        let query = Reproductor.find({fecha: fecha});
 
         query.sort('_id').exec((err, canciones)=> {
+            
             if(err) {
                 return  res.status(500).send({
                     status: 'error',
@@ -84,7 +87,7 @@ let reproductor = {
                 });
             }
 
-            if(!canciones) {
+            if(canciones.length == 0) {
                 return res.status(404).send({
                     status: 'error',
                     mensaje : 'No hay canciones para reproducir'
