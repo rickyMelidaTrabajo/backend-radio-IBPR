@@ -42,8 +42,9 @@ let canciones = {
 
     let audio = new Cancion();
 
+    //Una vez que carga el audio sacamos su duracion, y guardamos los datos
     audioLoader(`${ruta}${song}`).then((song) => {
-      duracion = song.duration;
+      duracion = Math.round(song.duration);
       console.log(`El audio dura ${duracion} segundos`);
 
 
