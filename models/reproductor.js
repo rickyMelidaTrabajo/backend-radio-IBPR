@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 let reproductorSchema = schema({
-    fecha: Date,
+    fecha: String,
     pos: Number,
     nombre: String,
     autor: String,
