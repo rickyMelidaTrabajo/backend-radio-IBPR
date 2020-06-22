@@ -33,18 +33,8 @@ let canciones = {
       var validaCancion = true;
     }
 
-<<<<<<< HEAD
     //var validaCancion = !validator.isEmpty(datos.audio);
     console.log(validaCancion);
-=======
-    let audio = new Cancion();
-
-    //Una vez que carga el audio sacamos su duracion, y guardamos los datos
-    audioLoader(`${ruta}${song}`).then((song) => {
-      duracion = Math.round(song.duration);
-      console.log(`El audio dura ${duracion} segundos`);
-
->>>>>>> f5fd22d41f82a3662e86a5b3ec701442483f1c03
 
     if (validaNombre && validaAutor && validaTipo && validaCancion) {
 
