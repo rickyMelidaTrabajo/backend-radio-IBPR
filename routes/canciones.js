@@ -8,6 +8,6 @@ let router = express();
 router.post('/add', canciones.agregar);
 router.get('/canciones/:nombre?', canciones.ver);
 router.put('/modificar/:id', canciones.modificar);
-router.delete('/delete/:id', canciones.eliminar);
+router.delete('/eliminar/:id', canciones.eliminar);
 
 module.exports = router;
