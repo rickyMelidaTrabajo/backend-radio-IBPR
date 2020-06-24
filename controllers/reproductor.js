@@ -40,7 +40,7 @@ let reproductor = {
             reproductor.nombre = datos.nombre;
             reproductor.autor = datos.autor;
             reproductor.tipo = datos.tipo;
-            reproductor.duracion = datos.duracion;
+            reproductor.duracion = Math.round(datos.duracion);
             reproductor.horaInicio = datos.horaInicio;
             reproductor.horaFin = datos.horaFin;
 
@@ -65,7 +65,7 @@ let reproductor = {
             });*/
         }else {
             return res.status(200).send({
-                status: 'error', 
+                status: 'error',
                 mensaje: 'No se validaron los datos'
             });
         }
@@ -79,7 +79,7 @@ let reproductor = {
         let query = Reproductor.find({fecha: fecha});
 
         query.sort('_id').exec((err, canciones)=> {
-            
+
             if(err) {
                 return  res.status(500).send({
                     status: 'error',
