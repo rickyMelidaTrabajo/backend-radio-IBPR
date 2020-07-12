@@ -7,16 +7,37 @@ const validator = require('validator');
 
 
 let canciones = {
-  agregar: (req, res) => {
-    //Datos que recibimos de la peticion http
-    let datos = req.body;
-    
+
+  /*guardarCancion: (cancion) => {
+    let ruta = `../canciones/${datos.autor}/`;
+
+
+    var song = `${cancion.nombre}.mp3`;
+
+    //Verificamos si existe la cancion
+    if (!fs.existsSync(`${ruta}${song}`)) {
+      // Movemos el audio en la carpeta del autor correspondientes
+      cancion.mv(path.resolve(`${ruta}${datos.nombre}.mp3`), err => {
+        if (err) {
+          return res.status(500).send({ message: err });
+        }
+        return res.status(200).send({ message: 'Archivo Guardado' });
+      });
+    } else {
+      console.log('La cancion ya existe');
+      return res.status(200).send({ message: 'El archivo ya existe' });
+    }
+  },*/
+
+  /*agregar: (req, res) => {
+
     let cancion;
     var validaCancion = false;
 
-    if(req.files) {
+    if (req.files) {
       cancion = req.files.audio;
       validaCancion = true;
+
     }
 
     //Ruta absoluta de las canciones
@@ -29,7 +50,7 @@ let canciones = {
     var validaAutor = !validator.isEmpty(datos.autor);
     var validaTipo = !validator.isEmpty(datos.tipo);
 
-    if(cancion) {
+    if (cancion) {
       var validaCancion = true;
     }
 
@@ -74,16 +95,8 @@ let canciones = {
 
         audio.save((err, musica) => {
           if (err || !musica) {
-            /* return res.status(404).send({
-               status: 'error',
-               message: "El audio no se ha guardado !!"
-             });*/
             console.log('Erro al guardar a la BD');
           } else {
-            //Devolver una respuesta
-            /*return res.status(200).send({
-              status: 'success',
-            });*/
             console.log('Se guardo el audio en la BD');
           }
         });
@@ -97,6 +110,121 @@ let canciones = {
       });
     }
 
+  },*/
+
+  ruta: {
+    absoluta: '../canciones/'
+  },
+
+  compruebaRuta: (req, res) => {
+
+    let rutaAbsoluta = canciones.ruta.absoluta;
+    let nombreCarpeta = req.body.autor;
+
+    var rutaRelativa = rutaAbsoluta + '/' + nombreCarpeta;
+
+    if (!fs.existsSync(path.resolve(`${rutaRelativa}`))) {
+      fs.mkdirSync(path.resolve(`${rutaRelativa}`), { recursive: false }, (err) => {
+        if (err) {
+          return res.status(500).send({
+            status: 'error',
+            mensaje: 'No se pudo crear la carpeta'
+          });
+        }
+      });
+
+      return res.status(200).send({
+        status: 'success',
+        mensaje: `Se crea la carpeta, ahora la ruta es ${rutaRelativa}`
+      });
+
+    } else {
+      return res.status(200).send({
+        status: 'success',
+        mensaje: `La ruta ${rutaRelativa} ya existe`
+      });
+    }
+
+  },
+
+  agregar: (req, res) => {
+    let datos = JSON.parse(req.body.datos);
+    let archivo = req.files.audio;
+
+    var validaNombre = !validator.isEmpty(datos.nombre);
+    var validaAutor = !validator.isEmpty(datos.autor);
+    var validaTipo = !validator.isEmpty(datos.tipo);
+
+    let rutaCancion = `${canciones.ruta.absoluta}${datos.autor}/${datos.nombre}.mp3`;
+
+    if (fs.existsSync(rutaCancion)) {
+      fs.unlink(archivo.path, (err)=>{
+        if(err) {
+          res.status(500).send({
+            status: 'error',
+            mensaje: 'Error 500'
+          });
+        }
+      });
+
+      res.status(200).send({
+        status: 'success',
+        mensaje: 'El audio ya existe'
+      });
+
+    } else {
+
+      //Validamos los datos del audio 
+      if (validaNombre && validaAutor && validaTipo) {
+
+        //validamos si el audio es 
+        if (archivo.type == 'audio/mpeg') {
+          fs.rename(archivo.path, rutaCancion, () => {
+
+            let audio = new Cancion();
+
+            audioLoader(rutaCancion).then((song) => {
+              let duracion = song.duration;
+
+              audio.nombre = datos.nombre;
+              audio.autor = datos.autor;
+              audio.tipo = datos.tipo;
+              audio.duracion = Math.round(duracion);
+
+              audio.save((err, musica) => {
+                if (err || !musica) {
+                  console.log('Erro al guardar a la BD');
+                } else {
+                  console.log('Se guardo el audio en la BD');
+                }
+              });
+
+
+            });
+            return res.status(200).send({
+              status: 'success',
+              mensaje: 'Cancion agregada'
+            });
+          });
+
+        } else {
+          return res.status(500).send({
+            status: 'error',
+            mensaje: 'Formato de archivo no valido'
+          });
+        }
+      } else {
+        return res.status(500).send({
+          status: 'error',
+          mensaje: 'Faltan completar algunos datos'
+        });
+      }
+
+    }
+
+
+
+
   },
 
   ver: (req, res) => {
@@ -104,15 +232,15 @@ let canciones = {
     let nombre = req.params.nombre;
 
     let query;
-    
+
     //Creamos una expresion regular para la busqueda, la cual obvia las mayusculas y minusculas
     let busqueda = new RegExp(nombre, "i");
 
     if (nombre || nombre != undefined) {
-      query = Cancion.find({ 
+      query = Cancion.find({
         $or: [
-          {"autor" : busqueda },
-          {"nombre": busqueda}
+          { "autor": busqueda },
+          { "nombre": busqueda }
         ]
       });
     } else {
@@ -148,7 +276,7 @@ let canciones = {
   modificar: (req, res) => {
     var id = req.params.id;
     var datos = req.body;
-    
+
     try {
       var validarNombre = !validator.isEmpty(datos.nombre);
       var validarAutor = !validator.isEmpty(datos.autor);
@@ -157,21 +285,21 @@ let canciones = {
     } catch (error) {
 
       return res.status(200).send({
-        status: 'error', 
+        status: 'error',
         mensaje: 'Faltan datos para enviar!!'
       });
     }
 
-    if(validarNombre && validarAutor && validarTipo) {
-      Cancion.findOneAndUpdate({_id: id}, datos, {new: true}, (err, cancionModificado)=>{
-        if(err) {
+    if (validarNombre && validarAutor && validarTipo) {
+      Cancion.findOneAndUpdate({ _id: id }, datos, { new: true }, (err, cancionModificado) => {
+        if (err) {
           return res.status(500).send({
             status: 'error',
-            mensaje:'Error al actualizar la cancion'
+            mensaje: 'Error al actualizar la cancion'
           });
         }
 
-        if(!cancionModificado) {
+        if (!cancionModificado) {
           return res.status(404).send({
             status: 'Error',
             mensaje: 'La cancion no existe!'
@@ -179,7 +307,7 @@ let canciones = {
         }
 
         //Modificamos las carpetas correspondientes a la cancion modificada
-        
+
 
 
         return res.status(200).send({
@@ -188,27 +316,27 @@ let canciones = {
         });
 
       })
-    }else {
+    } else {
       return res.status(200).send({
         status: 'Error',
         mensaje: 'La validacion no es correcta'
       });
     }
-    
+
   },
 
   eliminar: (req, res) => {
     var id = req.params.id;
 
-    Cancion.findOneAndDelete({_id: id}, (err, audioEliminado)=>{
-      if(err) {
+    Cancion.findOneAndDelete({ _id: id }, (err, audioEliminado) => {
+      if (err) {
         return res.status(500).send({
           status: 'Error',
           mensaje: 'Error al borrar!'
         });
       }
 
-      if(!audioEliminado) {
+      if (!audioEliminado) {
         return res.status(404).send({
           status: 'Error',
           mensaje: 'No se borro el audio, puede que no exista'
