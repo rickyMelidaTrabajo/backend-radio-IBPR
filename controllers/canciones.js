@@ -8,111 +8,7 @@ const validator = require('validator');
 
 let canciones = {
 
-  /*guardarCancion: (cancion) => {
-    let ruta = `../canciones/${datos.autor}/`;
-
-
-    var song = `${cancion.nombre}.mp3`;
-
-    //Verificamos si existe la cancion
-    if (!fs.existsSync(`${ruta}${song}`)) {
-      // Movemos el audio en la carpeta del autor correspondientes
-      cancion.mv(path.resolve(`${ruta}${datos.nombre}.mp3`), err => {
-        if (err) {
-          return res.status(500).send({ message: err });
-        }
-        return res.status(200).send({ message: 'Archivo Guardado' });
-      });
-    } else {
-      console.log('La cancion ya existe');
-      return res.status(200).send({ message: 'El archivo ya existe' });
-    }
-  },*/
-
-  /*agregar: (req, res) => {
-
-    let cancion;
-    var validaCancion = false;
-
-    if (req.files) {
-      cancion = req.files.audio;
-      validaCancion = true;
-
-    }
-
-    //Ruta absoluta de las canciones
-    let ruta = `../canciones/${datos.autor}/`;
-
-    var song = `${datos.nombre}.mp3`;
-    let duracion = 0;
-
-    var validaNombre = !validator.isEmpty(datos.nombre);
-    var validaAutor = !validator.isEmpty(datos.autor);
-    var validaTipo = !validator.isEmpty(datos.tipo);
-
-    if (cancion) {
-      var validaCancion = true;
-    }
-
-    //var validaCancion = !validator.isEmpty(datos.audio);
-    console.log(validaCancion);
-
-    if (validaNombre && validaAutor && validaTipo && validaCancion) {
-
-      // Vemos si no existe la carpeta del artista donde guardaremos la cancion
-      //Para crear una carpeta dentro de otra en window hay que usar {recursive: true}
-      if (!fs.existsSync(path.resolve(ruta))) {
-        fs.mkdirSync(path.resolve(ruta), { recursive: true }, (err) => {
-          console.log(err);
-        });
-      }
-
-      //Verificamos si existe la cancion
-      if (!fs.existsSync(`${ruta}${song}`)) {
-        // Movemos el audio en la carpeta del autor correspondientes
-        cancion.mv(path.resolve(`${ruta}${datos.nombre}.mp3`), err => {
-          if (err) {
-            return res.status(500).send({ message: err });
-          }
-          return res.status(200).send({ message: 'Archivo Guardado' });
-        });
-      } else {
-        console.log('La cancion ya existe');
-        return res.status(200).send({ message: 'El archivo ya existe' });
-      }
-
-      let audio = new Cancion();
-
-      audioLoader(`${ruta}${song}`).then((song) => {
-        duracion = song.duration;
-        console.log(`El audio dura ${duracion} segundos`);
-
-
-        audio.nombre = datos.nombre;
-        audio.autor = datos.autor;
-        audio.tipo = datos.tipo;
-        audio.duracion = Math.round(duracion);
-
-        audio.save((err, musica) => {
-          if (err || !musica) {
-            console.log('Erro al guardar a la BD');
-          } else {
-            console.log('Se guardo el audio en la BD');
-          }
-        });
-
-
-      })
-    } else {
-      res.status(500).send({
-        status: 'error',
-        mensaje: 'Faltan algunos datos'
-      });
-    }
-
-  },*/
-
-  ruta: {
+    ruta: {
     absoluta: '../canciones/'
   },
 
@@ -174,10 +70,10 @@ let canciones = {
 
     } else {
 
-      //Validamos los datos del audio 
+      //Validamos los datos del audio
       if (validaNombre && validaAutor && validaTipo) {
 
-        //validamos si el audio es 
+        //validamos si el audio es
         if (archivo.type == 'audio/mpeg') {
           fs.rename(archivo.path, rutaCancion, () => {
 
@@ -247,7 +143,7 @@ let canciones = {
       query = Cancion.find();
     }
 
-    console.log(`El nombre es ${nombre}`);
+    // console.log(`El nombre es ${nombre}`);
 
     query.sort('_id').exec((err, data) => {
 
