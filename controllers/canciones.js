@@ -239,6 +239,16 @@ let canciones = {
         });
       }
 
+      let eliminacion = `${canciones.ruta.absoluta}${audioEliminado.autor}/${audioEliminado.nombre}.mp3`;
+
+      if(fs.existsSync(eliminacion)) {
+
+        console.log(`Se elimino: ${eliminacion}`);
+        fs.unlinkSync(eliminacion);
+      }else {
+        console.log(`No existe la ruta ${eliminacion}`)
+      }
+
       return res.status(200).send({
         status: 'success',
         audio: audioEliminado
