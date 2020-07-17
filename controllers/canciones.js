@@ -173,6 +173,9 @@ let canciones = {
     var id = req.params.id;
     var datos = req.body;
 
+    //console.log(req.params);
+    //console.log(req.body);
+
     try {
       var validarNombre = !validator.isEmpty(datos.nombre);
       var validarAutor = !validator.isEmpty(datos.autor);
@@ -203,12 +206,13 @@ let canciones = {
         }
 
         //Modificamos las carpetas correspondientes a la cancion modificada
-
+        /*let rutaModificacion = `${canciones.ruta.absoluta}`;
+        if(fs.existsSync())*/
 
 
         return res.status(200).send({
           status: 'success',
-          cancion: cancionModificado
+          mensaje: 'Audio Actualizado!'
         });
 
       })
