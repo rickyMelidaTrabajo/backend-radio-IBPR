@@ -16,27 +16,27 @@ let reproductor = {
     agregar: (req, res) => {
         let datos = req.body;
 
-        // console.log(datos);
+         console.log(datos);
 
-        if (datos[0].nombre == '') {
-            console.log('Si esta vacio');
+        if (datos.audios.length <= 1) {
+            //console.log('Si esta vacio');
             res.status(400).send({
                 status: 'error',
                 mensaje: 'Necesita cargar canciones en el reproductor'
             })
         } else {
             let reproduce = new Reproductor();
-            reproduce.fecha = datos[0].fecha;
+            reproduce.fecha = datos.fecha;
 
-            for (var i = 0; i < datos.length; i++) {
+            for (var i = 0; i < datos.audios.length; i++) {
                 reproduce.audios.push({
-                    pos: datos[i].pos,
-                    nombre: datos[i].nombre,
-                    autor: datos[i].autor,
-                    tipo: datos[i].tipo,
-                    duracion: datos[i].duracion,
-                    horaInicio: datos[i].horaInicio,
-                    horaFin: datos[i].horaFin
+                    pos: datos.audios[i].pos,
+                    nombre: datos.audios[i].nombre,
+                    autor: datos.audios[i].autor,
+                    tipo: datos.audios[i].tipo,
+                    duracion: datos.audios[i].duracion,
+                    horaInicio: datos.audios[i].horaInicio,
+                    horaFin: datos.audios[i].horaFin
                 });
             }
 
@@ -57,6 +57,7 @@ let reproductor = {
 
             console.log(`No, no esta vacio y la longitud es ${datos.length}`);
         }
+        
 
     },
 
