@@ -90,6 +90,36 @@ let reproductor = {
 
         })
     },
+
+    getFechas: (req, res) => {
+
+        let query = Reproductor.find({}, {"fecha": 1, "_id":0});
+        
+
+        query.sort('_id').exec((err, fechas) => {
+
+            if (err) {
+                return res.status(500).send({
+                    status: 'error',
+                    mensaje: 'Error al devolver los datos'
+                });
+            }
+
+            if (fechas.length == 0) {
+                return res.status(404).send({
+                    status: 'error',
+                    mensaje: 'No hay canciones para reproducir'
+                });
+            }
+
+            return res.status(200).send({
+                status: 'success',
+                fechas
+            });
+
+        })
+    },
+
     modificar: (req, res) => {
 
     },
