@@ -27,6 +27,7 @@ let reproductor = {
         } else {
             let reproduce = new Reproductor();
             reproduce.fecha = datos.fecha;
+            reproduce.duracionTotal = datos.duracionTotal;
 
             for (var i = 0; i < datos.audios.length; i++) {
                 reproduce.audios.push({

@@ -4,6 +4,7 @@ const schema = mongoose.Schema;
 
 let reproductorSchema = schema({
   fecha: String,
+  duracionTotal: Number,
   audios:
     [
       {
